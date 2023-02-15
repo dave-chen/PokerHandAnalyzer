@@ -19,7 +19,7 @@ import java.util.List;
 @OpenAPIDefinition(info = @Info(title = "Poker Hand Analyzer API", version = "1.0",
         description = "There are 52 cards total. Each card has a suit [(H) Hearts, (C) Clubs, (D) Diamonds or (S) Spades] " +
                 "and a value [Ace, 2-9, (T) 10 , (J) Jack, (Q) Queen or (K) King]." +
-                "A sample 7 hand chard: [\"9D\", \"8C\",\"2S\", \"3C\", \"4H\", \"5D\", \"6C\"]"))
+                "A sample 7 hand card request body: [\"9D\", \"8C\",\"2S\", \"3C\", \"4H\", \"5D\", \"6C\"]"))
 public class MainController{
     public static final int SEVEN_CARD = 7;
     private PokerService service;
@@ -40,23 +40,16 @@ public class MainController{
             }
     )
     public ResponseEntity<Boolean> isStraight( @RequestBody List<Card> hand) {
-        if (hand == null || hand.isEmpty()  || hand.size() != SEVEN_CARD) {
-            throw new IllegalArgumentException("A valid hand must contain " + SEVEN_CARD + " cards.");
-        }
-
         try {
             boolean result = service.isStraight(hand);
             return ResponseEntity.ok(result);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body(false);
+        } 
+        catch (IllegalArgumentException e){
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
         }
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    public Error handleException(IllegalArgumentException e) {
-        return new Error(e.getMessage());
+        catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
+        }
     }
 
 }

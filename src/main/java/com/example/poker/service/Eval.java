@@ -3,7 +3,9 @@ package com.example.poker.service;
 import com.example.poker.domain.Card;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class Eval implements PokerService {
@@ -15,7 +17,12 @@ public class Eval implements PokerService {
      * @param hand
      * @return true if a hand has a straight, false otherwise
      */
-    public boolean isStraight(List<Card> hand) {
+    public boolean isStraight(final List<Card> hand) {
+
+        if (isInvalidHand(hand)){
+            throw new IllegalArgumentException("Invalid hand");
+        }
+
         int[] ranks = new int[15];
         int maxRank = 0;
 
@@ -46,6 +53,41 @@ public class Eval implements PokerService {
 
         //no straight
         return false;
+    }
+
+    /**
+     * Check a 7-card hand is invalid if any of the following conditions are true:
+     *
+     * The hand contains fewer than 7 cards.
+     * The hand contains more than 7 cards.
+     * The hand contains duplicate cards.
+     * @param cards
+     * @return
+     */
+    public boolean isInvalidHand(List<Card> cards) {
+        // Check that the size of the hand is exactly 7
+        if (cards.size() != 7) {
+            return true;
+        }
+
+        // Check for duplicate cards
+        if (!hasNoDuplicateCards(cards)) {
+            return true;
+        }
+
+        // If we reach this point, the hand is valid
+        return false;
+    }
+
+    private boolean hasNoDuplicateCards(List<Card> cards) {
+        Set<Card> uniqueCards = new HashSet<>();
+        for (Card card : cards) {
+            if (uniqueCards.contains(card)) {
+                return false;
+            }
+            uniqueCards.add(card);
+        }
+        return true;
     }
 
 }

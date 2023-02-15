@@ -6,7 +6,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonSerialize
-@Schema(example = "[\"8H\", \"9C\", \"2S\", \"7C\", \"4H\", \"5D\", \"6C\" ]",
+@Schema(example = "2C",
         description = "A hand consists of any 7 cards.  " +
                 "Each card has a suit (Hearts, Clubs, Diamonds or Spades) and a value (Ace, 2-10, Jack, Queen or King).")
 public class Card {
