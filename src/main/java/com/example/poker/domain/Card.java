@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;
 
+import java.util.Objects;
+
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonSerialize
 @Schema(example = "2C",
@@ -16,6 +18,19 @@ public class Card {
 
     @Schema(hidden = true)
     private char suit;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Card card1 = (Card) o;
+        return Objects.equals(card, card1.card);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(card);
+    }
 
     private String card;
 

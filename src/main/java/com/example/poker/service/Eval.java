@@ -10,6 +10,8 @@ import java.util.Set;
 @Service
 public class Eval implements PokerService {
 
+    public static final int SEVEN_CARD = 7;
+
     /**
      * Method to check if a given list of 7 cards has a straight.
      * A straight is a hand that contains five cards of sequential value. An Ace can be considered low (the card below a 2)
@@ -18,6 +20,10 @@ public class Eval implements PokerService {
      * @return true if a hand has a straight, false otherwise
      */
     public boolean isStraight(final List<Card> hand) {
+
+        if (hand == null || hand.isEmpty()){
+            throw new IllegalArgumentException("hand cannot be null or empty");
+        }
 
         if (isInvalidHand(hand)){
             throw new IllegalArgumentException("Invalid hand");
@@ -66,7 +72,7 @@ public class Eval implements PokerService {
      */
     public boolean isInvalidHand(List<Card> cards) {
         // Check that the size of the hand is exactly 7
-        if (cards.size() != 7) {
+        if (cards.size() != SEVEN_CARD) {
             return true;
         }
 

@@ -36,6 +36,7 @@ https://github.com/dave-chen/PokerHandAnalyzer/archive/refs/heads/master.zip
 **Swagger:**
 http://localhost:8080/swagger-ui.html when the application is running.
 
+Sample payload: ["9D", "8C","2S", "3C", "4H", "5D", "6C"]
 
 ## Testing Document
 
@@ -54,7 +55,7 @@ The endpoint tests can be tested by CURL:
 
 To run the  tests, perform the following steps when the application is running:
 
-      curl -X POST \
+      curl -X POST -v \
       http://localhost:8080/v1/poker/is-straight \
       -H 'Content-Type: application/json' \
       -d '["9D", "8C","2S", "3C", "4H", "5D", "6C"]'

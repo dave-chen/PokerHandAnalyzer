@@ -21,7 +21,6 @@ import java.util.List;
                 "and a value [Ace, 2-9, (T) 10 , (J) Jack, (Q) Queen or (K) King]." +
                 "A sample 7 hand card request body: [\"9D\", \"8C\",\"2S\", \"3C\", \"4H\", \"5D\", \"6C\"]"))
 public class MainController{
-    public static final int SEVEN_CARD = 7;
     private PokerService service;
 
     //@Autowired
