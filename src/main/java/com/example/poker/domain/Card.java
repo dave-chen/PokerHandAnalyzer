@@ -8,9 +8,9 @@ import java.util.Objects;
 
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonSerialize
-@Schema(example = "2C",
-        description = "A hand consists of any 7 cards.  " +
-                "Each card has a suit (Hearts, Clubs, Diamonds or Spades) and a value (Ace, 2-10, Jack, Queen or King).")
+//@Schema(example = "9D\", \"8C\",\"2S\", \"3C\", \"4H\", \"5D\", \"6C\"",
+//        description = "A hand consists of any 7 cards.  " +
+//                "Each card has a suit (Hearts, Clubs, Diamonds or Spades) and a value (Ace, 2-10, Jack, Queen or King).")
 public class Card {
 
     @Schema(hidden = true)

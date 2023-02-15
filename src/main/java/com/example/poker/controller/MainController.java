@@ -30,7 +30,8 @@ public class MainController{
     
     @PostMapping(value = "/isstraight", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
-            summary = "Determines if the provided hand is a straight",
+            summary = "Determines if the provided hand is a straight. \n\n Sample request body: [\"9D\", \"8C\",\"2S\", \"3C\", \"4H\", \"5D\", \"6C\"]\n" +
+                    "\n",
             responses = {
                     @ApiResponse(description = "Success", responseCode = "200", content = @Content),
                     @ApiResponse(description = "Bad request", responseCode = "400", content = @Content),
