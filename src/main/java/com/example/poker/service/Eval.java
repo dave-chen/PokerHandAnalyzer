@@ -1,6 +1,8 @@
 package com.example.poker.service;
 
 import com.example.poker.domain.Card;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -9,6 +11,8 @@ import java.util.Set;
 
 @Service
 public class Eval implements PokerService {
+
+    private static final Logger logger = LoggerFactory.getLogger(PokerService.class);
 
     public static final int SEVEN_CARD = 7;
 
@@ -22,10 +26,12 @@ public class Eval implements PokerService {
     public boolean isStraight(final List<Card> hand) {
 
         if (hand == null || hand.isEmpty()){
+            logger.error("hand cannot be null or empty");
             throw new IllegalArgumentException("hand cannot be null or empty");
         }
 
         if (isInvalidHand(hand)){
+            logger.error("Invalid hand");
             throw new IllegalArgumentException("Invalid hand");
         }
 
@@ -42,6 +48,7 @@ public class Eval implements PokerService {
             ranks[rank] = 1;
             //get the max value of all the cards
             maxRank = Math.max(maxRank, rank);
+            logger.debug("MaxRank: " + rank);
         }
 
         int consecutiveCount = 0;
@@ -58,6 +65,7 @@ public class Eval implements PokerService {
         }
 
         //no straight
+        logger.info("No straight found!");
         return false;
     }
 
@@ -73,6 +81,7 @@ public class Eval implements PokerService {
     public boolean isInvalidHand(List<Card> cards) {
         // Check that the size of the hand is exactly 7
         if (cards.size() != SEVEN_CARD) {
+            logger.debug("Invalid card size!");
             return true;
         }
 
@@ -89,6 +98,7 @@ public class Eval implements PokerService {
         Set<Card> uniqueCards = new HashSet<>();
         for (Card card : cards) {
             if (uniqueCards.contains(card)) {
+                logger.debug("Hand contains duplicate cards!");
                 return false;
             }
             uniqueCards.add(card);

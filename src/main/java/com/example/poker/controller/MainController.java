@@ -7,6 +7,8 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -21,6 +23,9 @@ import java.util.List;
                 "and a value [Ace, 2-9, (T) 10 , (J) Jack, (Q) Queen or (K) King]." +
                 "A sample 7 hand card request body: [\"9D\", \"8C\",\"2S\", \"3C\", \"4H\", \"5D\", \"6C\"]"))
 public class MainController{
+
+    private static final Logger logger = LoggerFactory.getLogger(MainController.class);
+
     private PokerService service;
 
     //@Autowired
@@ -45,9 +50,11 @@ public class MainController{
             return ResponseEntity.ok(result);
         } 
         catch (IllegalArgumentException e){
+            logger.error("Bad request: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(false);
         }
         catch (Exception e) {
+            logger.error("Unexpected error: " + e.getMessage());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(false);
         }
     }
