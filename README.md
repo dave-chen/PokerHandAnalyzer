@@ -13,7 +13,7 @@ Java 17
 Gradle 7.4.2  
 Spring Boot 2.3.3 or later
 
-##Getting Started
+## Getting Started
 
 **Clone the repository:**
 
@@ -36,10 +36,6 @@ https://github.com/dave-chen/PokerHandAnalyzer/archive/refs/heads/master.zip
 **Swagger:**
 http://localhost:8080/swagger-ui.html when the application is running.
 
-
-
-**POSTMAN collection:**  
-Coming soon
 
 ## Testing Document
 
