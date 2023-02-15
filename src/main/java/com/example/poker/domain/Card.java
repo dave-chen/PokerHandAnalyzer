@@ -53,7 +53,14 @@ public class Card {
         }
 
         this.rank = getRank(this.card.charAt(0));
-        this.suit = this.card.charAt(1);
+        this.suit = getSuit(this.card.charAt(1));
+    }
+
+    private char getSuit(char suitChar) {
+        if(suitChar == 'C' || suitChar == 'D' || suitChar == 'H' || suitChar == 'S') {
+           return suitChar;
+        }
+        throw new IllegalArgumentException("Invalid suit: " + suitChar + " Valid suit: [(H) Hearts, (C) Clubs, (D) Diamonds or (S) Spades]");
     }
 
     private int getRank(char rankChar) {
@@ -85,7 +92,7 @@ public class Card {
             case 'A':
                 return 1;
             default:
-                throw new IllegalArgumentException("Invalid rank: " + rankChar);
+                throw new IllegalArgumentException("Invalid rank: " + rankChar + " Valid ranks: 2, 3, 4, 5, 6, 7, 8, 9, T, Q, K, A");
         }
     }
 }

@@ -155,6 +155,28 @@ public class PokerServiceUnitTest {
     }
 
     @Test
+    public void test_invalid_hand_lessthan_7() {
+        List<Card> hand1 = Arrays.asList(
+                new Card("4S"),
+                new Card("5C"),
+                new Card("8H"),
+                new Card("9S"),
+                new Card("QS"));
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {service.isStraight(hand1);}, " Invalid hand");
+    }
+
+    @Test
+    public void test_invalid_rank() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {new Card("ZH");}, "");
+    }
+
+    @Test
+    public void test_invalid_suit() {
+        Assertions.assertThrows(IllegalArgumentException.class, () -> {new Card("3Z");}, "");
+    }
+
+
+    @Test
     public void test_invalid_hand_with_null() {
         Assertions.assertThrows(IllegalArgumentException.class, () -> {service.isStraight(null);}, "hand cannot be null or empty");
     }
