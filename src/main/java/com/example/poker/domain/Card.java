@@ -4,8 +4,6 @@ import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import io.swagger.v3.oas.annotations.media.Schema;
 
-import javax.validation.constraints.NotNull;
-
 @JsonAutoDetect(fieldVisibility = JsonAutoDetect.Visibility.ANY)
 @JsonSerialize
 @Schema(example = "[\"8H\", \"9C\", \"2S\", \"7C\", \"4H\", \"5D\", \"6C\" ]",
@@ -26,6 +24,14 @@ public class Card {
         extractCard(card);
     }
 
+    public int getRank() {
+        return rank;
+    }
+
+    public char getSuit() {
+        return suit;
+    }
+
     private void extractCard(String card) {
         if (this.card == null || this.card.isEmpty() || this.card.length() != 2){
             throw new IllegalArgumentException("Invalid card: " + card);
@@ -33,14 +39,6 @@ public class Card {
 
         this.rank = getRank(this.card.charAt(0));
         this.suit = this.card.charAt(1);
-    }
-
-    public int getRank() {
-        return rank;
-    }
-
-    public char getSuit() {
-        return suit;
     }
 
     private int getRank(char rankChar) {

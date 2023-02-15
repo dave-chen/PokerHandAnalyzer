@@ -7,7 +7,6 @@ import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.info.Info;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +28,8 @@ public class MainController{
     public MainController(PokerService service){
         this.service = service;
     }
-
-    @PostMapping("/test")
-    public String postBody(@RequestBody String fullName) {
-        return "Hello " + fullName;
-    }
     
-    @PostMapping(value = "/is-straight", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/isstraight", consumes = MediaType.APPLICATION_JSON_VALUE)
     @Operation(
             summary = "Determines if the provided hand is a straight",
             responses = {

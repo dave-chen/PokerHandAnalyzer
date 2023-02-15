@@ -41,7 +41,7 @@ public class ControllerTest {
         String requestBody = objectMapper.writeValueAsString(cards);
 
         when(service.isStraight(any())).thenReturn(true);
-        mockMvc.perform(post("/v1/poker/is-straight")
+        mockMvc.perform(post("/v1/poker/isstraight")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(requestBody))
                 .andExpect(status().isOk())
@@ -50,10 +50,13 @@ public class ControllerTest {
 
     @Test
     void testAhandWithNoStaight() throws Exception {
-        mockMvc.perform(post("/v1/poker/is-straight")
+        mockMvc.perform(post("/v1/poker/isstraight")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content("[\"9D\", \"8C\",\"2S\", \"3C\", \"QH\", \"5D\", \"6C\"]")).
-                andExpect(status().isOk());
+                        .content("[\"9D\", \"8C\",\"2S\", \"3C\", \"QH\", \"5D\", \"6C\"]"))
+                        .andExpect(status().isOk())
+                        .andExpect(content().string("false"));
     }
+
+    //more tests can be added, such as bad request.
 
 }
